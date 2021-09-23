@@ -1,3 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "https://js.arcgis.com/4.19/@arcgis/core/assets/esri/themes/light/main.css";
+
 html,
 body {
   padding: 0;
@@ -13,4 +18,8 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+.side-bar__color {
+  background-color: #2b2b2b;
 }
