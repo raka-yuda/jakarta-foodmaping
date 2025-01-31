@@ -51,7 +51,6 @@ const chartSlice = createSlice({
         state.status = "loading";
       })
       .addCase(fetchChart.fulfilled, (state, action) => {
-        // console.log(action.payload.);
         state.status = "succeeded";
         state.chart = { ...state.chart, ...action.payload };
       })

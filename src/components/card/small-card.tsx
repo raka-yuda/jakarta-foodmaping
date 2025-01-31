@@ -4,7 +4,7 @@ interface Props {
 
 const SmallCard = ({ title }: Props) => {
   return (
-    <div className="flex flex-grow items-center p-4 my-1 shadow-md rounded">
+    <div className="flex flex-grow items-center p-4 my-1 shadow-lg rounded border">
       <p className="text-base">{title}</p>
     </div>
   );
