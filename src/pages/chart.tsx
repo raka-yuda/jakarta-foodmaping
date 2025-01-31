@@ -1,59 +1,131 @@
 import { useEffect, useRef, useState } from "react";
-import { BarChart, MainMap, MainTable, PieChart } from "../components";
-import WebMap from "@arcgis/core/WebMap";
-import MapView from "@arcgis/core/views/MapView";
+import { BarChart, MainTable, PieChart } from "../components";
+// import WebMap from "@arcgis/core/WebMap";
+// import MapView from "@arcgis/core/views/MapView";
 
 import {
   fetchRestaurants,
   RestaurantState,
 } from "../redux/slices/restaurant-slice";
 
-import { RootState } from "../redux/store";
+import { AppDispatch, RootState } from "../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import DashboardLayout from "../layouts/dashboard-layout";
 import { fetchChart, ChartState } from "../redux/slices/chart-slice";
+import { ThemeState } from "@/redux/slices/theme-slice";
 
 const Chart = () => {
+  const { themeVariant }: ThemeState = useSelector(
+    (state: RootState) => state.theme
+  );
+
   const { chart }: ChartState = useSelector((state: RootState) => state.chart);
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     dispatch(fetchChart({ group_by: "rating" }));
   }, [dispatch]);
 
   return (
-    <DashboardLayout titlePage={"Admin | Dashboard"}>
-      <p>Chart Page</p>
-      <div className={`flex flex-col`}>
-        <div className="md:grid md:grid-cols-4 md:gap-3 my-2">
-          <figure className="col-span-2 shadow-2xl bg-white rounded-md my-2 bg-cover h-auto w-auto p-4">
-            <p className={`text-lg font-bold p-4`}>
-              Chart of Restaurant Overall Rating
-            </p>
-            {chart && (
-              <PieChart
-                data={chart.data}
-                title={`Restaurants`}
-                unit={`Restaurants`}
-              />
-            )}
-          </figure>
-          <figure className="col-span-2 shadow-2xl bg-white rounded-md my-2 bg-cover h-auto w-auto p-4">
-            <p className={`text-lg font-bold p-4`}>
-              Chart of Restaurant Overall Rating
-            </p>
-            {chart && (
-              <BarChart
-                data={chart.data}
-                title={`Restaurants`}
-                unit={`Restaurants`}
-              />
-            )}
-          </figure>
-        </div>
-      </div>
-    </DashboardLayout>
+    <>
+      {themeVariant === "default" &&   
+        <DashboardLayout titlePage={"chart | Jakarta Foodmapping"} variant={"default"}>
+          <div className={`flex flex-col`}>
+            <div className="md:grid md:grid-cols-4 md:gap-3 my-2">
+              <figure className="col-span-2 shadow-2xl bg-white rounded-md my-2 bg-cover h-auto w-auto p-4">
+                <p className={`text-lg font-bold p-4`}>
+                  Chart of Restaurant Overall Rating
+                </p>
+                {chart && (
+                  <PieChart
+                    data={chart.data}
+                    title={`Restaurants`}
+                    unit={`Restaurants`}
+                  />
+                )}
+              </figure>
+              <figure className="col-span-2 shadow-2xl bg-white rounded-md my-2 bg-cover h-auto w-auto p-4">
+                <p className={`text-lg font-bold p-4`}>
+                  Chart of Restaurant Overall Rating
+                </p>
+                {chart && (
+                  <BarChart
+                    data={chart.data}
+                    title={`Restaurants`}
+                    unit={`Restaurants`}
+                  />
+                )}
+              </figure>
+            </div>
+          </div>
+        </DashboardLayout>
+      }
+
+      {themeVariant === "rounded" &&    
+        <DashboardLayout titlePage={"Chart | Jakarta Foodmapping"} variant={"rounded"}>
+          <div className={`w-full p-8`}>
+            <div className="grid grid-cols-4 md:gap-6 gap-4">
+              <figure className="col-span-4 md:col-span-2 shadow-2xl bg-white rounded-2xl my-2 bg-cover h-auto w-auto p-4">
+                <p className={`text-lg font-bold p-4`}>
+                  Chart of Restaurant Overall Rating
+                </p>
+                {chart && (
+                  <PieChart
+                    data={chart.data}
+                    title={`Restaurants`}
+                    unit={`Restaurants`}
+                  />
+                )}
+              </figure>
+              <figure className="col-span-4 md:col-span-2 shadow-2xl bg-white rounded-2xl my-2 bg-cover h-auto w-auto p-4">
+                <p className={`text-lg font-bold p-4`}>
+                  Chart of Restaurant Overall Rating
+                </p>
+                {chart && (
+                  <BarChart
+                    data={chart.data}
+                    title={`Restaurants`}
+                    unit={`Restaurants`}
+                  />
+                )}
+              </figure>
+            </div>
+          </div>
+        </DashboardLayout>
+      }
+    </>
+
+    // <DashboardLayout titlePage={"Chart | Jakarta Foodmapping"}>
+    //   <div className={`flex flex-col`}>
+    //     <div className="md:grid md:grid-cols-4 md:gap-3 my-2">
+    //       <figure className="col-span-2 shadow-2xl bg-white rounded-md my-2 bg-cover h-auto w-auto p-4">
+    //         <p className={`text-lg font-bold p-4`}>
+    //           Chart of Restaurant Overall Rating
+    //         </p>
+    //         {chart && (
+    //           <PieChart
+    //             data={chart.data}
+    //             title={`Restaurants`}
+    //             unit={`Restaurants`}
+    //           />
+    //         )}
+    //       </figure>
+    //       <figure className="col-span-2 shadow-2xl bg-white rounded-md my-2 bg-cover h-auto w-auto p-4">
+    //         <p className={`text-lg font-bold p-4`}>
+    //           Chart of Restaurant Overall Rating
+    //         </p>
+    //         {chart && (
+    //           <BarChart
+    //             data={chart.data}
+    //             title={`Restaurants`}
+    //             unit={`Restaurants`}
+    //           />
+    //         )}
+    //       </figure>
+    //     </div>
+    //   </div>
+    // </DashboardLayout>
   );
 };
 
