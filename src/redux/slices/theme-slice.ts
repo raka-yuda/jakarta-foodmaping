@@ -5,8 +5,8 @@ export interface ThemeState {
 }
 
 const initialState = {
-  themeVariant: "rounded"
-  // themeVariant: "default"
+  // themeVariant: "rounded"
+  themeVariant: "default"
 } as ThemeState;
 
 const themeSlice = createSlice({
