@@ -32,9 +32,9 @@ const MainTable = ({
   const totalPage = Math.ceil(dataPaging.length_all_data / dataPaging.length);
   const currentPage = dataPaging.page;
   const paging = pagination(currentPage, totalPage);
-  const dataFrom = (dataPaging.page - 1) * dataPaging.length ?? "-";
+  const dataFrom = (dataPaging.page - 1) * dataPaging.length;
 
-  const dataUntil = dataFrom + dataPaging.length ?? "-";
+  const dataUntil = dataFrom + dataPaging.length;
 
   const handlerPagination = (page: number) => {
     hrefPaging(page);
@@ -49,7 +49,7 @@ const MainTable = ({
               headerTable.map((head, indexHead) => (
                 <th
                   key={`header-${indexHead}`}
-                  className="px-6 py-3 border-b-2 border-gray-300 text-left leading-4 text-gray-800 tracking-wider text-base"
+                  className="px-6 py-3 border-b-2 border-gray-300 text-left leading-4 text-gray-800 text-base"
                 >
                   {head}
                 </th>
