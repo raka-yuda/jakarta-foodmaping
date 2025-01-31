@@ -43,16 +43,16 @@ const SidebarItem = ({ title, path, child }: Props) => {
         <div x-show="open" className="bg-gray-100">
           {child.map((item, index) => {
             return (
-              <Link key={`sub-item-${index}`} href={item.path}>
-                <a
-                  className={`py-4 px-16 block text-sm hover:bg-red-600 hover:text-white ${
-                    item.path === pathname
-                      ? "bg-red-600 text-white"
-                      : "bg-white"
-                  }`}
-                >
-                  {item.title}
-                </a>
+              <Link 
+                key={`sub-item-${index}`} 
+                href={item.path}
+                className={`py-4 px-16 block text-sm hover:bg-red-600 hover:text-white ${
+                  item.path === pathname
+                    ? "bg-red-600 text-white"
+                    : "bg-white"
+                }`}
+              >
+                {item.title}
               </Link>
             );
           })}
